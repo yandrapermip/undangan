@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Undangan Pernikahan Yandra & Lowly — Adat Minang</title>
+<meta name="description" content="Undangan pernikahan Yandra & Lowly bertema adat Minang dengan personalisasi nama tamu, RSVP WhatsApp, musik, countdown, galeri, tema, dan animasi." />
+<style>
+  :root{
+    --maroon:#8b0000;
+    --maroon-dark:#640000;
+    --gold:#b8860b;
+    --cream:#fff8f0;
+    --text:#2b2b2b;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;font-family: "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif;color:var(--text);background:var(--cream)}
+  a{color:inherit}
+
+  /* Navbar */
+  .nav{position:sticky;top:0;z-index:60;background:linear-gradient(180deg,var(--maroon),var(--maroon-dark));color:#fff;box-shadow:0 6px 14px rgba(0,0,0,.15)}
+  .nav .wrap{display:flex;align-items:center;justify-content:space-between;max-width:980px;margin:0 auto;padding:10px 14px}
+  .nav a{color:#fff;text-decoration:none;font-weight:700;margin:0 8px}
+  .nav .menu{display:flex;gap:10px;flex-wrap:wrap}
+  .theme-toggle{border:0;border-radius:999px;background:var(--gold);color:#fff;font-weight:700;padding:8px 12px;cursor:pointer}
+
+  /* Cover / Gate */
+  .cover{position:fixed;inset:0;background:linear-gradient(180deg,var(--maroon),var(--maroon-dark));color:#fff;display:flex;align-items:center;justify-content:center;z-index:80;flex-direction:column;text-align:center;padding:24px}
+  .cover.hidden{display:none}
+  .cover-card{background:rgba(255,255,255,0.08);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.2);border-radius:20px;padding:28px;max-width:520px;width:100%;box-shadow:0 12px 30px rgba(0,0,0,.35);animation:floatIn .8s ease both}
+  .cover h1{font-family: Georgia, serif;font-weight:700;margin:6px 0 0;font-size:2rem}
+  .cover h2{font-weight:400;margin:4px 0 0;font-size:1rem;opacity:.92}
+  .btn-primary{appearance:none;border:0;border-radius:12px;background:var(--gold);color:#fff;font-weight:700;padding:12px 18px;cursor:pointer;margin-top:18px;box-shadow:0 6px 16px rgba(0,0,0,.25);transition:transform .05s ease}
+  .btn-primary:active{transform:scale(.98)}
+  .cover .ornament{height:44px;background:url('https://i.ibb.co/xsk7hJr/minang-pattern-gonjong.png') repeat-x;background-size:auto 44px;margin:14px -16px 0}
+
+  /* Header */
+  header{position:relative;background:linear-gradient(180deg,var(--maroon),var(--maroon-dark));color:#fff;text-align:center;padding:60px 20px 110px;overflow:hidden}
+  header .gonjong{position:absolute;left:0;right:0;bottom:-48px;height:48px;background:url('https://i.ibb.co/xsk7hJr/minang-pattern-gonjong.png') repeat-x;background-size:auto 48px;opacity:.95}
+  header h1{font-family: Georgia, serif;font-size:3rem;margin:0}
+  header p.subtitle{margin:10px 0 0;font-style:italic;opacity:.95}
+
+  /* Hero avatar */
+  .avatar-wrap{margin-top:-84px;display:flex;justify-content:center}
+  .avatar{width:180px;height:180px;border-radius:999px;border:6px solid var(--gold);box-shadow:0 10px 28px rgba(0,0,0,.35);object-fit:cover;animation:pop .6s ease .2s both}
+
+  /* Sections */
+  section{padding:28px 16px}
+  .card{background:#fff;border:2px solid var(--gold);border-radius:14px;max-width:980px;margin:12px auto;padding:18px;box-shadow:0 6px 18px rgba(0,0,0,.08)}
+  .big{font-size:1.1rem;line-height:1.65}
+  .nama-tamu{color:var(--maroon);font-weight:800}
+  .btn{display:inline-block;text-decoration:none;background:var(--maroon);color:#fff;padding:12px 18px;border-radius:10px;font-weight:700}
+  .btn + .btn{margin-left:10px}
+  .btn-gold{background:var(--gold)}
+  .pill{display:inline-block;border:1px solid var(--gold);padding:6px 10px;border-radius:999px;font-size:.9rem;margin:6px}
+
+  /* Motif band */
+  .band{background:url('https://i.ibb.co/McgBZZW/motif-songket.png') center/cover no-repeat;padding:18px}
+
+  /* Countdown */
+  .countdown{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:10px}
+  .box{background:#fff;border:2px solid var(--gold);border-radius:12px;padding:10px 14px;min-width:82px}
+  .box .num{font-weight:800;font-size:1.6rem;color:var(--maroon)}
+
+  /* Gallery */
+  .gallery{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .gallery img{width:100%;height:180px;object-fit:cover;border-radius:12px;border:2px solid var(--gold)}
+  @media(min-width:720px){.gallery{grid-template-columns:repeat(4,1fr)}.gallery img{height:140px}}
+
+  /* Footer */
+  footer{background:var(--maroon-dark);color:#fff;text-align:center;padding:18px;font-size:.95rem;margin-top:24px}
+
+  /* Animations */
+  @keyframes floatIn{from{opacity:0;transform:translateY(14px) scale(.98)}to{opacity:1;transform:translateY(0) scale(1)}}
+  @keyframes pop{from{opacity:0;transform:scale(.8)}to{opacity:1;transform:scale(1)}}
+  .reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease, transform .6s ease}
+  .reveal.visible{opacity:1;transform:none}
+
+  /* Tools */
+  details.tools{max-width:980px;margin:24px auto}
+  details.tools summary{cursor:pointer;background:#fff;border:1px dashed var(--gold);padding:12px 14px;border-radius:12px;font-weight:700}
+  .tools .grid{display:grid;grid-template-columns:1fr;gap:12px;margin-top:12px}
+  .tools textarea{width:100%;min-height:120px;border:1px solid #ddd;border-radius:10px;padding:10px}
+  .tools input[type="text"], .tools input[type="url"], .tools input[type="datetime-local"]{width:100%;border:1px solid #ddd;border-radius:10px;padding:10px}
+  .tools .out{border:1px solid #ddd;border-radius:10px;padding:10px;background:#fff;min-height:100px;white-space:nowrap;overflow:auto}
+  .tools .row{display:grid;grid-template-columns:1fr;gap:10px}
+  .tools .btn-small{padding:10px 12px;border-radius:10px;border:0;background:var(--maroon);color:#fff;font-weight:700;cursor:pointer}
+  .chip{display:inline-flex;align-items:center;border:1px solid #ddd;border-radius:999px;padding:6px 10px;margin:4px 6px}
+  .chip button{margin-left:8px}
+
+  /* Alternate theme (black-gold) */
+  [data-theme="black"]{--maroon:#111;--maroon-dark:#000;--gold:#cfa335;--cream:#faf7ef;--text:#1f1f1f}
+
+  /* Responsive */
+  @media (min-width:640px){
+    header h1{font-size:3.4rem}
+    .big{font-size:1.15rem}
+    .tools .grid{grid-template-columns:1fr 1fr}
+  }
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="nav">
+  <div class="wrap">
+    <div style="font-weight:800">Y&L — Minang</div>
+    <div class="menu">
+      <a href="#sapaan">Undangan</a>
+      <a href="#waktu">Waktu</a>
+      <a href="#galeri">Galeri</a>
+      <a href="#rsvp">RSVP</a>
+      <a href="#tools">Tools</a>
+    </div>
+    <button id="themeToggle" class="theme-toggle" type="button">🎨 Tema</button>
+  </div>
+</nav>
+
+<!-- Cover Gate with Play -->
+<div class="cover" id="cover">
+  <div class="cover-card">
+    <div class="ornament" aria-hidden="true"></div>
+    <h2>Undangan Pernikahan</h2>
+    <h1>Yandra & Lowly</h1>
+    <p style="opacity:.9;margin:10px 0 0">Dengan adat Minangkabau</p>
+    <button class="btn-primary" id="btnOpen">Buka Undangan & Putar Musik ♪</button>
+    <p style="font-size:.9rem;opacity:.85;margin-top:10px">*Jika musik tidak otomatis, pastikan volume aktif lalu tekan tombol di atas.</p>
+  </div>
+</div>
+
+<!-- Background audio -->
+<audio id="bgm" preload="auto" loop>
+  <!-- Ganti src di bawah dengan file musik Minang (MP3) yang kamu punya -->
+  <source src="" type="audio/mpeg" />
+</audio>
+
+<header>
+  <h1 class="reveal">Yandra & Lowly</h1>
+  <p class="subtitle reveal" style="animation-delay:.1s">Dengan Adat Minangkabau</p>
+  <div class="gonjong" aria-hidden="true"></div>
+</header>
+
+<div class="avatar-wrap">
+  <!-- Ganti src foto di bawah dengan foto kalian -->
+  <img class="avatar" src="file:///C:/Users/HP/Downloads/foto1.jpg" alt="Foto Pasangan" />
+</div>
+
+<section>
+  <div class="card big reveal" id="sapaan">
+    <p id="namaTamu" class="nama-tamu">Kepada Yth. Tamu Undangan</p>
+    <p>Dengan penuh rasa syukur, kami mengundang Anda untuk hadir dalam hari bahagia kami.</p>
+    <div class="pill">📅 Minggu, 14 Desember 2025</div>
+    <div class="pill">⏰ 10.00 WIB – Selesai</div>
+    <div class="pill">📍 Gedung Adat Minangkabau, Padang</div>
+  </div>
+
+  <div class="card reveal" id="waktu">
+    <h3 style="margin:6px 0 10px">Menuju Hari H</h3>
+    <div class="countdown" id="countdown">
+      <div class="box"><div class="num" id="dd">-</div><div>Hari</div></div>
+      <div class="box"><div class="num" id="hh">-</div><div>Jam</div></div>
+      <div class="box"><div class="num" id="mm">-</div><div>Menit</div></div>
+      <div class="box"><div class="num" id="ss">-</div><div>Detik</div></div>
+    </div>
+    <p class="big" style="margin-top:10px">Akad: 09.00 WIB • Resepsi: 10.00 WIB</p>
+    <div style="margin-top:14px">
+      <a class="btn" target="_blank" href="https://maps.google.com?q=Gedung+Adat+Minangkabau+Padang">📍 Lihat Lokasi</a>
+      <a class="btn btn-gold" id="btnCalendar" href="#">🗓️ Simpan ke Kalender</a>
+    </div>
+  </div>
+
+  <div class="band reveal" aria-hidden="true"></div>
+
+  <div class="card reveal" id="galeri">
+    <h3 style="margin-top:0">Galeri</h3>
+    <p class="big">Tambahkan beberapa foto prewedding atau momen spesial.</p>
+    <div class="gallery">
+      <img src="https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=1200&auto=format&fit=crop" alt="Foto 1"/>
+      <img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?q=80&w=1200&auto=format&fit=crop" alt="Foto 2"/>
+      <img src="https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=1200&auto=format&fit=crop" alt="Foto 3"/>
+      <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1200&auto=format&fit=crop" alt="Foto 4"/>
+    </div>
+  </div>
+
+  <div class="card reveal" id="rsvp">
+    <h3 style="margin-top:0">Konfirmasi Kehadiran</h3>
+    <p class="big">Mohon konfirmasi kehadiran Anda melalui WhatsApp berikut ini.</p>
+    <div>
+      <a id="linkRSVP" class="btn" target="_blank" href="#">✅ RSVP via WhatsApp</a>
+      <button id="toggleMusic" class="btn btn-gold" type="button">⏯️ Musik</button>
+    </div>
+  </div>
+</section>
+
+<!-- TOOLS: Generator Nama & Link -->
+<details class="tools" id="tools">
+  <summary>🛠️ Tools: Buat Link Undangan Personal & Daftar Nama</summary>
+  <div class="grid">
+    <div class="card">
+      <h4 style="margin:0 0 8px">Generator Satu Nama</h4>
+      <div class="row">
+        <input id="baseUrl" type="url" placeholder="Base URL undangan, mis: https://domainmu.com/undangan.html" />
+        <input id="oneName" type="text" placeholder="Nama tamu, mis: Rizky Pratama" />
+        <button class="btn-small" id="btnGenOne">Buat Link</button>
+        <div id="outOne" class="out" aria-live="polite"></div>
+      </div>
+    </div>
+    <div class="card">
+      <h4 style="margin:0 0 8px">Generator Banyak Nama (Tempel daftar, satu nama per baris)</h4>
+      <textarea id="bulkNames" placeholder="Contoh:\nRizky Pratama\nIbu Sari\nBapak Dedi & Keluarga"></textarea>
+      <div class="row">
+        <input id="bulkBase" type="url" placeholder="Base URL undangan (opsional, default: alamat halaman ini)" />
+        <button class="btn-small" id="btnGenBulk">Buat Semua Link</button>
+        <button class="btn-small" id="btnCopyBulk">Copy Semua</button>
+      </div>
+      <div id="outBulk" class="out" aria-live="polite"></div>
+    </div>
+  </div>
+</details>
+
+<footer>
+  Dengan hormat,<br/>Yandra & Lowly<br/>
+  <small>© 2025 Undangan Digital Adat Minang</small>
+</footer>
+
+<script>
+  // Helpers
+  const $ = (sel)=>document.querySelector(sel);
+  const params = new URLSearchParams(location.search);
+
+  // 1) Personalize guest name from ?to=
+  const namaParam = params.get('to');
+  if(namaParam){ $('#namaTamu').textContent = 'Kepada Yth. ' + namaParam; }
+
+  // 2) Build RSVP WhatsApp message (include guest name if available)
+  const phone = '082210393056'; // GANTI ke nomor WA penerima konfirmasi
+  const pesan = `Halo Yandra & Lowly, saya ${namaParam?namaParam:'...'} akan menghadiri resepsi.`;
+  const waURL = `https://wa.me/${phone}?text=${encodeURIComponent(pesan)}`;
+  $('#linkRSVP').href = waURL;
+
+  // 3) Cover gate: start music on user interaction
+  const audio = $('#bgm');
+  const cover = $('#cover');
+  $('#btnOpen').addEventListener('click', async ()=>{
+    cover.classList.add('hidden');
+    try{ await audio.play(); }catch(e){ console.warn('Autoplay blocked'); }
+  });
+
+  // 4) Toggle music button
+  $('#toggleMusic').addEventListener('click', async ()=>{
+    try{ if(audio.paused){ await audio.play(); } else { audio.pause(); } }
+    catch(e){ alert('Silakan tekan tombol \"Buka Undangan\" dulu.'); }
+  });
+
+  // 5) Reveal on scroll animations
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(en=>{ if(en.isIntersecting){ en.target.classList.add('visible'); io.unobserve(en.target);} });
+  }, {threshold: .12});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+  // 6) Tools: single name generator
+  function buildLink(base, name){
+    try{ const u = new URL(base || location.href); u.searchParams.set('to', name); return u.toString(); }
+    catch(e){ return '' }
+  }
+  $('#btnGenOne').addEventListener('click', ()=>{
+    const base = $('#baseUrl').value.trim() || location.href;
+    const name = $('#oneName').value.trim();
+    if(!name){ $('#outOne').textContent = 'Masukkan nama tamu terlebih dahulu.'; return; }
+    const link = buildLink(base, name);
+    $('#outOne').innerHTML = link ? `<a href="${link}" target="_blank">${link}</a>` : 'Base URL tidak valid.';
+  });
+
+  // 7) Tools: bulk generator
+  $('#btnGenBulk').addEventListener('click', ()=>{
+    const base = $('#bulkBase').value.trim() || location.href;
+    const lines = $('#bulkNames').value.split(/\n+/).map(s=>s.trim()).filter(Boolean);
+    if(!lines.length){ $('#outBulk').textContent = 'Tempel daftar nama (satu per baris).'; return; }
+    const links = lines.map(n=> buildLink(base, n)).filter(Boolean);
+    const html = links.map(l=>`<div class="chip"><a href="${l}" target="_blank">${l}</a><button class="btn-small" onclick="navigator.clipboard.writeText('${l.replaceAll('"','&quot;')}')">Copy</button></div>`).join('');
+    $('#outBulk').innerHTML = html || 'Base URL tidak valid.';
+  });
+  $('#btnCopyBulk').addEventListener('click', ()=>{
+    const tmp = document.createElement('textarea');
+    tmp.value = Array.from($('#outBulk').querySelectorAll('a')).map(a=>a.href).join('\n');
+    document.body.appendChild(tmp); tmp.select(); document.execCommand('copy'); document.body.removeChild(tmp);
+  });
+
+  // 8) Add-to-calendar (ICS generator)
+  function downloadICS(){
+    const title = 'Pernikahan Yandra & Lowly';
+    const start = '20251214T030000Z'; // 10:00 WIB = 03:00Z
+    const end   = '20251214T070000Z'; // 14:00 WIB = 07:00Z
+    const desc  = 'Resepsi pernikahan Yandra & Lowly. Lokasi: Gedung Adat Minangkabau, Padang.';
+    const loc   = 'Gedung Adat Minangkabau, Padang';
+    const ics = `BEGIN:VCALENDAR\nVERSION:2.0\nPRODID:-//Yandra//Undangan Minang//ID\nBEGIN:VEVENT\nUID:${Date.now()}@yandra-undangan\nDTSTAMP:${new Date().toISOString().replace(/[-:]/g,'').replace(/\..+/,'Z')}\nDTSTART:${start}\nDTEND:${end}\nSUMMARY:${title}\nDESCRIPTION:${desc}\nLOCATION:${loc}\nEND:VEVENT\nEND:VCALENDAR`;
+    const blob = new Blob([ics], {type:'text/calendar'});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a'); a.href=url; a.download='yandra-lowly.ics'; a.click(); URL.revokeObjectURL(url);
+  }
+  $('#btnCalendar').addEventListener('click', (e)=>{ e.preventDefault(); downloadICS(); });
+
+  // 9) Countdown timer to 14 Dec 2025 10:00 WIB (UTC+7)
+  const target = new Date('2025-12-14T10:00:00+07:00').getTime();
+  const tick = ()=>{
+    const now = Date.now();
+    let diff = Math.max(0, target - now);
+    const d = Math.floor(diff / (1000*60*60*24)); diff -= d*24*60*60*1000;
+    const h = Math.floor(diff / (1000*60*60)); diff -= h*60*60*1000;
+    const m = Math.floor(diff / (1000*60)); diff -= m*60*1000;
+    const s = Math.floor(diff / 1000);
+    $('#dd').textContent=d; $('#hh').textContent=h; $('#mm').textContent=m; $('#ss').textContent=s;
+  };
+  tick(); setInterval(tick,1000);
+
+  // 10) Theme switcher (gold-maroon ↔ black-gold)
+  $('#themeToggle').addEventListener('click', ()=>{
+    const cur = document.body.getAttribute('data-theme');
+    document.body.setAttribute('data-theme', cur==='black' ? '' : 'black');
+  });
+
+  // 11) Optional: Open tools by default if ?tools=1
+  if(params.get('tools')==='1'){
+    document.querySelector('details.tools').setAttribute('open','true');
+  }
+</script>
+</body>
+</html>
